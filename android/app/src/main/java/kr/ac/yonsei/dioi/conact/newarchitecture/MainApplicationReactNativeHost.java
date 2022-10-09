@@ -1,4 +1,4 @@
-package com.wardrobe.newarchitecture;
+package kr.ac.yonsei.dioi.conact.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.wardrobe.BuildConfig;
-import com.wardrobe.newarchitecture.components.MainComponentsRegistry;
-import com.wardrobe.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import kr.ac.yonsei.dioi.conact.BuildConfig;
+import kr.ac.yonsei.dioi.conact.newarchitecture.components.MainComponentsRegistry;
+import kr.ac.yonsei.dioi.conact.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
