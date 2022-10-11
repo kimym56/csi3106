@@ -30,35 +30,6 @@ jobs:
         env:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
       - name: Create GitHub release
-        id: gh_release
         uses: softprops/action-gh-release@v1
         with:
           files: android/app/build/outputs/apk/release/app-release.apk
-      - name: Notify to Slack channel
-        uses: slackapi/slack-github-action@v1.22.0
-        with:
-          payload: |
-            {
-              "text": "새로운 버전이 릴리즈되었어요: ${{github.ref_name}}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "새로운 버전이 릴리즈되었어요: ${{github.ref_name}}"
-                  },
-                  "accessory": {
-                    "type": "button",
-                    "text": {
-                      "type": "plain_text",
-                      "text": ":arrow_down: 다운로드",
-                      "emoji": true
-                    },
-                    "url": "${{ steps.gh_release.outputs.url }}"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
