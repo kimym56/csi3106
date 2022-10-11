@@ -1,61 +1,48 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import { Section } from './Section';
-import { styles } from './styles';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ScreenName } from './constants';
+import { useAuth } from './hooks/auth';
+import HomeScreen from './screens/HomeScreen';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
+
+const Stack = createNativeStackNavigator();
+const BottomTab = createBottomTabNavigator();
 
 export function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+  return (
+    <NavigationContainer>
+      <SafeAreaProvider>
+        <RootNavigator />
+      </SafeAreaProvider>
+    </NavigationContainer>
+  );
+}
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+function RootNavigator() {
+  const { isLoggedIn } = useAuth();
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}
-      >
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}
-        >
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <Stack.Navigator>
+      {isLoggedIn ? (
+        <Stack.Screen name={ScreenName.메인} options={{ headerShown: false }} component={MainNavigator} />
+      ) : (
+        <>
+          <Stack.Screen name={ScreenName.로그인} options={{ title: '로그인' }} component={LoginScreen} />
+          <Stack.Screen name={ScreenName.회원가입} options={{ title: '회원가입' }} component={SignupScreen} />
+        </>
+      )}
+    </Stack.Navigator>
+  );
+}
+
+function MainNavigator() {
+  return (
+    <BottomTab.Navigator>
+      <BottomTab.Screen name={ScreenName.홈} component={HomeScreen} />
+    </BottomTab.Navigator>
   );
 }
