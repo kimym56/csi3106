@@ -1,39 +1,44 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useAtomValue } from 'jotai';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { authAtom } from './atoms/auth';
 import { ScreenName } from './constants';
-import { useAuth } from './hooks/auth';
+import { AuthStatus } from './models/auth';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
+import SplashScreen from './screens/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
 
 export function App() {
   return (
-    <NavigationContainer>
-      <SafeAreaProvider>
-        <RootNavigator />
-      </SafeAreaProvider>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Suspense fallback={<SplashScreen />}>
+          <RootNavigator />
+        </Suspense>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
 function RootNavigator() {
-  const { isLoggedIn } = useAuth();
+  const { status } = useAtomValue(authAtom);
 
   return (
     <Stack.Navigator>
-      {isLoggedIn ? (
-        <Stack.Screen name={ScreenName.메인} options={{ headerShown: false }} component={MainNavigator} />
-      ) : (
+      {status === AuthStatus.INVALID ? (
         <>
           <Stack.Screen name={ScreenName.로그인} options={{ title: '로그인' }} component={LoginScreen} />
           <Stack.Screen name={ScreenName.회원가입} options={{ title: '회원가입' }} component={SignupScreen} />
         </>
+      ) : (
+        <Stack.Screen name={ScreenName.메인} options={{ headerShown: false }} component={MainNavigator} />
       )}
     </Stack.Navigator>
   );

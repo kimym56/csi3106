@@ -1884,6 +1884,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-async-storage/async-storage@npm:^1.17.10":
+  version: 1.17.10
+  resolution: "@react-native-async-storage/async-storage@npm:1.17.10"
+  dependencies:
+    merge-options: ^3.0.4
+  peerDependencies:
+    react-native: ^0.0.0-0 || 0.60 - 0.70 || 1000.0.0
+  checksum: 66a49bc82c498e70f2154ab6e25318e370fa1de8bd94fa3225246dfc269a377f9e1af3737dd845e19160c35a6d644383054aaef7e9734c0a84af7b8fe40694cd
+  languageName: node
+  linkType: hard
+
 "@react-native-community/cli-clean@npm:^9.1.0":
   version: 9.1.0
   resolution: "@react-native-community/cli-clean@npm:9.1.0"
@@ -2098,6 +2109,15 @@ __metadata:
   version: 1.2.0
   resolution: "@react-native-community/eslint-plugin@npm:1.2.0"
   checksum: 613f1786256b56da2b2988352b33eda5cc2f78862ae35b1ac6b4f7bbcdbabb9e2d37fd28135b14c642e4735f37a0ad6218d3b1798b372450e62b61a3c8965ad3
+  languageName: node
+  linkType: hard
+
+"@react-native-community/netinfo@npm:^9.3.4":
+  version: 9.3.4
+  resolution: "@react-native-community/netinfo@npm:9.3.4"
+  peerDependencies:
+    react-native: ">=0.59"
+  checksum: 23395c96b468fc50f26df15937d234f8feef77aa5b5e659b53423672a805f4f7f32788618442b6b6a7847905597bcef5aeb91db01d6b9a91ed32ce46c873b6bf
   languageName: node
   linkType: hard
 
@@ -3786,7 +3806,9 @@ __metadata:
     "@babel/core": ^7.12.9
     "@babel/preset-env": ^7.19.1
     "@babel/runtime": ^7.12.5
+    "@react-native-async-storage/async-storage": ^1.17.10
     "@react-native-community/eslint-config": ^2.0.0
+    "@react-native-community/netinfo": ^9.3.4
     "@react-navigation/bottom-tabs": ^6.4.0
     "@react-navigation/native": ^6.0.13
     "@react-navigation/native-stack": ^6.9.0
@@ -3802,6 +3824,7 @@ __metadata:
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-simple-import-sort: ^8.0.0
     jest: ^26.6.3
+    jotai: ^1.8.5
     metro-react-native-babel-preset: ^0.72.1
     prettier: ^2.7.1
     react: 18.1.0
@@ -5898,6 +5921,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-plain-obj@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "is-plain-obj@npm:2.1.0"
+  checksum: cec9100678b0a9fe0248a81743041ed990c2d4c99f893d935545cfbc42876cbe86d207f3b895700c690ad2fa520e568c44afc1605044b535a7820c1d40e38daa
+  languageName: node
+  linkType: hard
+
 "is-plain-object@npm:^2.0.3, is-plain-object@npm:^2.0.4":
   version: 2.0.4
   resolution: "is-plain-object@npm:2.0.4"
@@ -6607,6 +6637,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jotai@npm:^1.8.5":
+  version: 1.8.5
+  resolution: "jotai@npm:1.8.5"
+  peerDependencies:
+    "@babel/core": "*"
+    "@babel/template": "*"
+    "@tanstack/query-core": "*"
+    "@urql/core": "*"
+    immer: "*"
+    optics-ts: "*"
+    react: ">=16.8"
+    valtio: "*"
+    wonka: "*"
+    xstate: "*"
+  peerDependenciesMeta:
+    "@babel/core":
+      optional: true
+    "@babel/template":
+      optional: true
+    "@tanstack/query-core":
+      optional: true
+    "@urql/core":
+      optional: true
+    immer:
+      optional: true
+    optics-ts:
+      optional: true
+    valtio:
+      optional: true
+    wonka:
+      optional: true
+    xstate:
+      optional: true
+  checksum: 3baf0f744cf1d772faa13d0dc5667c043adedb829b336f4e10ac4b778138573e735039a517a8b3ab6e3113d8fda63a4afcf24fe2ebdfa8630399d1441ef36dee
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -7070,6 +7137,15 @@ __metadata:
   version: 5.2.1
   resolution: "memoize-one@npm:5.2.1"
   checksum: a3cba7b824ebcf24cdfcd234aa7f86f3ad6394b8d9be4c96ff756dafb8b51c7f71320785fbc2304f1af48a0467cbbd2a409efc9333025700ed523f254cb52e3d
+  languageName: node
+  linkType: hard
+
+"merge-options@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "merge-options@npm:3.0.4"
+  dependencies:
+    is-plain-obj: ^2.1.0
+  checksum: d86ddb3dd6e85d558dbf25dc944f3527b6bacb944db3fdda6e84a3f59c4e4b85231095f58b835758b9a57708342dee0f8de0dffa352974a48221487fe9f4584f
   languageName: node
   linkType: hard
 
