@@ -1,10 +1,20 @@
+import { client, getAuthorizationHeader } from '../utils/network';
+
 interface ValidateTokenParams {
   token: string;
 }
 
-export async function validateToken(params: ValidateTokenParams): Promise<boolean> {
-  console.debug('validateToken(', params, ')');
-  return false;
+export async function validateToken({ token }: ValidateTokenParams): Promise<boolean> {
+  try {
+    await client.get('api/v1/user/me', {
+      headers: {
+        authorization: getAuthorizationHeader(token),
+      },
+    });
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 interface ObtainTokenParams {
@@ -17,6 +27,5 @@ interface ObtainTokenResult {
 }
 
 export async function obtainToken(params: ObtainTokenParams): Promise<ObtainTokenResult> {
-  console.debug('obtainToken(', params, ')');
-  throw new Error('not implemented');
+  return await client.post('api/v1/auth/login', { json: params }).json();
 }

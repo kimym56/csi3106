@@ -3852,6 +3852,7 @@ __metadata:
     eslint-plugin-simple-import-sort: ^8.0.0
     jest: ^26.6.3
     jotai: ^1.8.5
+    ky: ^0.31.4
     metro-react-native-babel-preset: ^0.72.1
     prettier: ^2.7.1
     react: 18.1.0
@@ -6944,6 +6945,13 @@ __metadata:
   version: 3.0.3
   resolution: "kleur@npm:3.0.3"
   checksum: df82cd1e172f957bae9c536286265a5cdbd5eeca487cb0a3b2a7b41ef959fc61f8e7c0e9aeea9c114ccf2c166b6a8dd45a46fd619c1c569d210ecd2765ad5169
+  languageName: node
+  linkType: hard
+
+"ky@npm:^0.31.4":
+  version: 0.31.4
+  resolution: "ky@npm:0.31.4"
+  checksum: 5b1a72a5c28c68674c6f943ece7f3552233c26c34649875c7b33e7dfb4ffa2b7c861f2e846e00114cf975b3a177a72e396701673854982f85babaa5532dbf0bc
   languageName: node
   linkType: hard
 

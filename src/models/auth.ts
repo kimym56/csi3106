@@ -6,7 +6,6 @@ export interface AuthState {
 export const enum AuthStatus {
   VALID = 'valid',
   INVALID = 'invalid',
-  UNKNOWN = 'unknown',
 }
 
 export interface AuthStorage {
