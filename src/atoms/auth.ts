@@ -5,7 +5,7 @@ import { validateToken } from '../remotes/auth';
 import { tokenRef } from '../utils/network';
 import { storage } from '../utils/storage';
 
-type AuthUpdate = { type: 'login'; token: string };
+type AuthUpdate = { type: 'login'; token: string } | { type: 'logout' };
 
 const authStorageAtom = atomWithStorage<AuthStorage>('auth', { token: null }, storage);
 
@@ -14,7 +14,6 @@ const baseAuthAtom = atomWithDefault(async (get) => {
   tokenRef.current = state.token;
   return state;
 });
-
 export const authAtom = atom(
   (get) => get(baseAuthAtom),
   (get, set, update: AuthUpdate) => {
@@ -23,6 +22,12 @@ export const authAtom = atom(
         set(authStorageAtom, { token: update.token });
         set(baseAuthAtom, { status: AuthStatus.VALID, token: update.token });
         tokenRef.current = update.token;
+        break;
+
+      case 'logout':
+        set(authStorageAtom, { token: null });
+        set(baseAuthAtom, { status: AuthStatus.VALID, token: null });
+        tokenRef.current = null;
         break;
     }
   },

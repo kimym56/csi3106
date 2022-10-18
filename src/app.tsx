@@ -41,8 +41,13 @@ function RootNavigator() {
     <Stack.Navigator>
       {status === AuthStatus.INVALID ? (
         <>
-          <Stack.Screen name={ScreenName.로그인} options={{ title: '로그인' }} component={LoginScreen} />
           <Stack.Screen name={ScreenName.회원가입} options={{ title: '회원가입' }} component={SignupScreen} />
+          {/* <Stack.Screen
+            name={ScreenName.회원가입2}
+            options={{ title: '회원가입2' }}
+            component={SignupScreen_verification}
+          /> */}
+          <Stack.Screen name={ScreenName.로그인} options={{ title: '로그인' }} component={LoginScreen} />
         </>
       ) : (
         <Stack.Screen name={ScreenName.메인} options={{ headerShown: false }} component={MainNavigator} />

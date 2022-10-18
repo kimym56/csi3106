@@ -3,6 +3,7 @@ import { ParamListBase } from '@react-navigation/native';
 export const enum ScreenName {
   로그인 = 'login',
   회원가입 = 'signup',
+  회원가입2 = 'signup2',
   메인 = 'main',
   홈 = 'home',
 }
