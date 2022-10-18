@@ -26,7 +26,7 @@ export const authAtom = atom(
 
       case 'logout':
         set(authStorageAtom, { token: null });
-        set(baseAuthAtom, { status: AuthStatus.VALID, token: null });
+        set(baseAuthAtom, { status: AuthStatus.INVALID, token: null });
         tokenRef.current = null;
         break;
     }
