@@ -14,6 +14,7 @@ const baseAuthAtom = atomWithDefault(async (get) => {
   tokenRef.current = state.token;
   return state;
 });
+
 export const authAtom = atom(
   (get) => get(baseAuthAtom),
   (get, set, update: AuthUpdate) => {

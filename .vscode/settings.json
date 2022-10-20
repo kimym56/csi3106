@@ -3,6 +3,10 @@
     "**/.git": true,
     "**/node_modules": true
   },
+  "search.exclude": {
+    ".yarn": true,
+    "yarn.lock": true
+  },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
