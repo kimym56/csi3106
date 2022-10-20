@@ -6,6 +6,7 @@ export const enum ScreenName {
   회원가입2 = 'signup2',
   메인 = 'main',
   홈 = 'home',
+  마이페이지 = 'mypage',
 }
 
 export type ParamList = ParamListBase & {};

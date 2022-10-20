@@ -1,8 +1,7 @@
 import { atom } from 'jotai';
 import { atomWithDefault, atomWithStorage } from 'jotai/utils';
 import { AuthState, AuthStatus, AuthStorage } from '../models/auth';
-import { validateToken } from '../remotes/auth';
-import { tokenRef } from '../utils/network';
+import { client, getAuthorizationHeader, queryClient, tokenRef } from '../utils/network';
 import { storage } from '../utils/storage';
 
 type AuthUpdate = { type: 'login'; token: string } | { type: 'logout' };
@@ -29,6 +28,7 @@ export const authAtom = atom(
         set(authStorageAtom, { token: null });
         set(baseAuthAtom, { status: AuthStatus.INVALID, token: null });
         tokenRef.current = null;
+        queryClient.clear();
         break;
     }
   },
@@ -39,10 +39,14 @@ interface ValidateAuthStateParams {
 }
 
 async function validateAuthState({ token }: ValidateAuthStateParams): Promise<AuthState> {
-  const isValid = token != null && (await validateToken({ token }));
+  if (token == null) {
+    return { status: AuthStatus.INVALID, token: null };
+  }
 
-  return {
-    status: isValid ? AuthStatus.VALID : AuthStatus.INVALID,
-    token,
-  };
+  try {
+    await client.get('api/v1/user/me', { headers: { authorization: getAuthorizationHeader(token) } });
+    return { status: AuthStatus.VALID, token };
+  } catch {
+    return { status: AuthStatus.INVALID, token };
+  }
 }

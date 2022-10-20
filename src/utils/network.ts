@@ -1,3 +1,4 @@
+import { QueryClient } from '@tanstack/react-query';
 import ky from 'ky';
 
 interface RefObject<T> {
@@ -5,6 +6,8 @@ interface RefObject<T> {
 }
 
 export const tokenRef: RefObject<string> = { current: null };
+
+export const queryClient = new QueryClient();
 
 export const client = ky.create({
   prefixUrl: 'http://conact-service.cys.wo.tc/',

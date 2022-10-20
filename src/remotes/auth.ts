@@ -1,21 +1,4 @@
-import { client, getAuthorizationHeader } from '../utils/network';
-
-interface ValidateTokenParams {
-  token: string;
-}
-
-export async function validateToken({ token }: ValidateTokenParams): Promise<boolean> {
-  try {
-    await client.get('api/v1/user/me', {
-      headers: {
-        authorization: getAuthorizationHeader(token),
-      },
-    });
-    return true;
-  } catch {
-    return false;
-  }
-}
+import { client } from '../utils/network';
 
 interface ObtainTokenParams {
   email: string;
