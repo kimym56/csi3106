@@ -1,19 +1,13 @@
 import React from 'react';
 import { Button, StyleSheet, View } from 'react-native';
-import { useSetAtom } from 'jotai';
-import { authAtom } from '../../atoms/auth';
+import { useLogout } from '../../hooks/auth';
 
 export default function MyPageScreen() {
-  const update = useSetAtom(authAtom);
+  const logout = useLogout();
 
   return (
     <View style={styles.container}>
-      <Button
-        title="로그아웃"
-        onPress={() => {
-          update({ type: 'logout' });
-        }}
-      />
+      <Button title="로그아웃" onPress={logout} />
     </View>
   );
 }

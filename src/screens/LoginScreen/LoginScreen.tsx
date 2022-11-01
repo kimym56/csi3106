@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import TextInputController from '../../components/TextInputController';
 import { ScreenName } from '../../constants';
-import { useLogin } from './useLogin';
+import { useLogin } from '../../hooks/auth';
 
 interface Values {
   email: string;
