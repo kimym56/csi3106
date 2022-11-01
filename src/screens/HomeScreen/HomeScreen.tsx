@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Portal } from 'react-native-paper';
+import FlatListInTabView from '../../components/FlatListInTabView';
 import MenuButton from './MenuButton';
 import ProfileDisplay from './ProfileDisplay';
 
@@ -11,6 +12,8 @@ export default function HomeScreen() {
         <View style={styles.topContainer}>
           <ProfileDisplay />
         </View>
+
+        <FlatListInTabView />
         <MenuButton />
       </View>
     </Portal.Host>
