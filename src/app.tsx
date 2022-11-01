@@ -1,9 +1,11 @@
 import React, { Suspense } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme as NavigationDefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
+import { MD3LightTheme as PaperDefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import Icon from 'react-native-vector-icons/Feather';
@@ -25,17 +27,32 @@ const bottomTabIcons: Record<string, string> = {
   [ScreenName.마이페이지]: 'user',
 };
 
+const CombinedDefaultTheme = {
+  ...NavigationDefaultTheme,
+  ...PaperDefaultTheme,
+  colors: {
+    ...NavigationDefaultTheme.colors,
+    ...PaperDefaultTheme.colors,
+  },
+};
 export function App() {
   return (
     <SafeAreaProvider>
-      <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          <Suspense fallback={<SplashScreen />}>
-            <RootNavigator />
-          </Suspense>
-        </NavigationContainer>
-        <Toast />
-      </QueryClientProvider>
+      <PaperProvider
+        settings={{
+          icon: (props) => <Icon {...props} />,
+        }}
+        theme={CombinedDefaultTheme}
+      >
+        <QueryClientProvider client={queryClient}>
+          <NavigationContainer theme={CombinedDefaultTheme}>
+            <Suspense fallback={<SplashScreen />}>
+              <RootNavigator />
+            </Suspense>
+          </NavigationContainer>
+          <Toast />
+        </QueryClientProvider>
+      </PaperProvider>
     </SafeAreaProvider>
   );
 }
