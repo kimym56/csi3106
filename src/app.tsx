@@ -17,6 +17,7 @@ import LoginScreen from './screens/LoginScreen';
 import MyPageScreen from './screens/MyPageScreen';
 import SignupScreen from './screens/SignupScreen';
 import SplashScreen from './screens/SplashScreen';
+import StyleDetailScreen from './screens/StyleDetailScreen';
 import { queryClient } from './utils/network';
 
 const Stack = createNativeStackNavigator();
@@ -35,6 +36,7 @@ const CombinedDefaultTheme = {
     ...PaperDefaultTheme.colors,
   },
 };
+
 export function App() {
   return (
     <SafeAreaProvider>
@@ -68,7 +70,10 @@ function RootNavigator() {
           <Stack.Screen name={ScreenName.회원가입} options={{ title: '회원가입' }} component={SignupScreen} />
         </>
       ) : (
-        <Stack.Screen name={ScreenName.메인} options={{ headerShown: false }} component={MainNavigator} />
+        <>
+          <Stack.Screen name={ScreenName.메인} options={{ headerShown: false }} component={MainNavigator} />
+          <Stack.Screen name={ScreenName.스타일_상세} options={{ title: 'style 상세' }} component={StyleDetailScreen} />
+        </>
       )}
     </Stack.Navigator>
   );

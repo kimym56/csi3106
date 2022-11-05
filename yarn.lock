@@ -2279,6 +2279,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-navigation/material-top-tabs@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "@react-navigation/material-top-tabs@npm:6.3.0"
+  dependencies:
+    color: ^4.2.3
+    warn-once: ^0.1.0
+  peerDependencies:
+    "@react-navigation/native": ^6.0.0
+    react: "*"
+    react-native: "*"
+    react-native-pager-view: ">= 4.0.0"
+    react-native-tab-view: ">= 3.0.0"
+  checksum: e4d6f96705b18dc7127b5d4350d7c749d13383160b61618578622522c415684a5ffe585c1aba9f5c769bc26caadfb9b7db2e34663ccbf45b59828728fa6ec00a
+  languageName: node
+  linkType: hard
+
 "@react-navigation/native-stack@npm:^6.9.0":
   version: 6.9.0
   resolution: "@react-navigation/native-stack@npm:6.9.0"
@@ -3973,6 +3989,7 @@ __metadata:
     "@react-native-community/eslint-config": ^2.0.0
     "@react-native-community/netinfo": ^9.3.4
     "@react-navigation/bottom-tabs": ^6.4.0
+    "@react-navigation/material-top-tabs": ^6.3.0
     "@react-navigation/native": ^6.0.13
     "@react-navigation/native-stack": ^6.9.0
     "@tanstack/react-query": ^4.10.3
