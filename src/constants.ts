@@ -8,12 +8,18 @@ export const enum ScreenName {
   홈 = 'home',
   스타일_목록 = 'style-list',
   스타일_상세 = 'style-detail',
+  스타일_업로드 = 'style-upload',
   상점_목록 = 'shop-list',
+  상점_상세 = 'shop-detail',
+  상점_업로드 = 'shop-upload',
   마이페이지 = 'mypage',
 }
 
 export type ParamList = ParamListBase & {
   [ScreenName.스타일_상세]: {
+    clothesId: number;
+  };
+  [ScreenName.상점_상세]: {
     clothesId: number;
   };
 };

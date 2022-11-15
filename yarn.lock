@@ -4014,6 +4014,7 @@ __metadata:
     react-hook-form: ^7.37.0
     react-native: 0.70.3
     react-native-gesture-handler: ^2.7.1
+    react-native-image-crop-picker: ^0.38.1
     react-native-pager-view: ^6.0.1
     react-native-paper: ^5.0.0-rc.9
     react-native-reanimated: ^2.11.0
@@ -8825,6 +8826,15 @@ __metadata:
   version: 0.70.3
   resolution: "react-native-gradle-plugin@npm:0.70.3"
   checksum: 04a3379842bcb4709ac6b37e093a3de59acd33b28b200885843b13908fac685a77ab81d732c34090c56e5c0eec971d578b227f302bd04fe7901e8792d434f41f
+  languageName: node
+  linkType: hard
+
+"react-native-image-crop-picker@npm:^0.38.1":
+  version: 0.38.1
+  resolution: "react-native-image-crop-picker@npm:0.38.1"
+  peerDependencies:
+    react-native: ">=0.40.0"
+  checksum: e2705cfe5400cf30d372402e1d4933405aacc2cd07fd6fbd25a7a1b31f27ffefd5a033dd6dc71c0b40e62c5f1362919292327912315efc7dcd34bcdc49f1ee12
   languageName: node
   linkType: hard
 

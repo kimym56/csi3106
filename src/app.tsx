@@ -15,9 +15,12 @@ import { AuthStatus } from './models/auth';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import MyPageScreen from './screens/MyPageScreen';
+import ShopDetailScreen from './screens/ShopDetailScreen';
+import ShopUploadScreen from './screens/ShopUploadScreen';
 import SignupScreen from './screens/SignupScreen';
 import SplashScreen from './screens/SplashScreen';
 import StyleDetailScreen from './screens/StyleDetailScreen';
+import StyleUploadScreen from './screens/StyleUploadScreen';
 import { queryClient } from './utils/network';
 
 const Stack = createNativeStackNavigator();
@@ -73,6 +76,13 @@ function RootNavigator() {
         <>
           <Stack.Screen name={ScreenName.메인} options={{ headerShown: false }} component={MainNavigator} />
           <Stack.Screen name={ScreenName.스타일_상세} options={{ title: 'style 상세' }} component={StyleDetailScreen} />
+          <Stack.Screen
+            name={ScreenName.스타일_업로드}
+            options={{ title: 'style 업로드' }}
+            component={StyleUploadScreen}
+          />
+          <Stack.Screen name={ScreenName.상점_상세} options={{ title: 'shop 상세' }} component={ShopDetailScreen} />
+          <Stack.Screen name={ScreenName.상점_업로드} options={{ title: 'shop 업로드' }} component={ShopUploadScreen} />
         </>
       )}
     </Stack.Navigator>
