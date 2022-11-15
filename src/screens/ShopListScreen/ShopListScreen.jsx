@@ -10,7 +10,7 @@ export default function ShopListScreen() {
   const { navigate } = useNavigation();
 
   const { data: DATA } = useQuery({
-    queryKey: ['styles'],
+    queryKey: ['shop-list'],
     queryFn: () => client.get('api/v1/closet/shop').json(),
   });
 

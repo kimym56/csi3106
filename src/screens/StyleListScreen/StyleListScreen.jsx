@@ -11,7 +11,7 @@ export default function StyleListScreen() {
 
   const { data: DATA } = useQuery({
     queryKey: ['styles'],
-    queryFn: () => client.get('api/v1/closet/styles').json(),
+    queryFn: () => client.get('api/v1/styles/me').json(),
   });
 
   return (
@@ -23,7 +23,7 @@ export default function StyleListScreen() {
             <TouchableOpacity onPress={() => navigate(ScreenName.스타일_상세, { clothesId: item.id })}>
               <Image
                 style={[styles.imageStyle, { width: layout.width / 3, height: ((layout.width / 3) * 4) / 3 }]}
-                source={{ uri: `${IMAGE_URL_PREFIX}${item.image}` }}
+                source={{ uri: `${IMAGE_URL_PREFIX}${item.imagePath}` }}
               />
             </TouchableOpacity>
           </View>
