@@ -1,6 +1,8 @@
 export interface Style {
   id: number;
-  image: string;
+  imagePath: string;
   type: string;
   size: string;
+  uploaderName: string;
+  uploadedTime: string;
 }

@@ -10,7 +10,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import Icon from 'react-native-vector-icons/Feather';
 import { authAtom } from './atoms/auth';
-import { ScreenName } from './constants';
+import { Colors, ScreenName } from './constants';
 import { AuthStatus } from './models/auth';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -66,7 +66,7 @@ function RootNavigator() {
   const { status } = useAtomValue(authAtom);
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerTitleAlign: 'center', headerTintColor: Colors.ACCENT }}>
       {status === AuthStatus.INVALID ? (
         <>
           <Stack.Screen name={ScreenName.로그인} options={{ title: '로그인' }} component={LoginScreen} />
@@ -75,7 +75,14 @@ function RootNavigator() {
       ) : (
         <>
           <Stack.Screen name={ScreenName.메인} options={{ headerShown: false }} component={MainNavigator} />
-          <Stack.Screen name={ScreenName.스타일_상세} options={{ title: 'style 상세' }} component={StyleDetailScreen} />
+          <Stack.Screen
+            name={ScreenName.스타일_상세}
+            options={{
+              title: 'style 상세',
+              headerRight: (props) => <StyleDetailScreen.HeaderRight {...props} />,
+            }}
+            component={StyleDetailScreen}
+          />
           <Stack.Screen
             name={ScreenName.스타일_업로드}
             options={{ title: 'style 업로드' }}

@@ -16,6 +16,7 @@
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.0",
     "@tanstack/react-query": "^4.10.3",
+    "date-fns": "^2.29.3",
     "jotai": "^1.8.5",
     "ky": "^0.31.4",
     "react": "18.1.0",

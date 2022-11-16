@@ -17,7 +17,7 @@ export const enum ScreenName {
 
 export type ParamList = ParamListBase & {
   [ScreenName.스타일_상세]: {
-    clothesId: number;
+    styleId: number;
   };
   [ScreenName.상점_상세]: {
     clothesId: number;
@@ -31,3 +31,9 @@ declare global {
 }
 
 export const IMAGE_URL_PREFIX = 'https://pub-5060761a398f439d8ef34d5acfc6bc3a.r2.dev/';
+
+export const Colors = {
+  ACCENT: '#6600FF',
+  SECONDARY: 'rgba(0, 0, 0, 0.4)',
+  WHITE: '#FFFFFF',
+} as const;

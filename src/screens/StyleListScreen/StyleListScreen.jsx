@@ -1,18 +1,14 @@
 import React from 'react';
-import { FlatList, Image, StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useQuery } from '@tanstack/react-query';
-import { IMAGE_URL_PREFIX, ScreenName } from '../../constants';
-import { client } from '../../utils/network';
+import ClothesImage from '../../components/ClothesImage';
+import { ScreenName } from '../../constants';
+import { useMyStyleListQuery } from '../../hooks/style';
 
 export default function StyleListScreen() {
   const layout = useWindowDimensions();
   const { navigate } = useNavigation();
-
-  const { data: DATA } = useQuery({
-    queryKey: ['styles'],
-    queryFn: () => client.get('api/v1/styles/me').json(),
-  });
+  const { data: DATA } = useMyStyleListQuery();
 
   return (
     <View>
@@ -20,10 +16,10 @@ export default function StyleListScreen() {
         data={DATA}
         renderItem={({ item }) => (
           <View style={styles.flatView}>
-            <TouchableOpacity onPress={() => navigate(ScreenName.스타일_상세, { clothesId: item.id })}>
-              <Image
+            <TouchableOpacity onPress={() => navigate(ScreenName.스타일_상세, { styleId: item.id })}>
+              <ClothesImage
                 style={[styles.imageStyle, { width: layout.width / 3, height: ((layout.width / 3) * 4) / 3 }]}
-                source={{ uri: `${IMAGE_URL_PREFIX}${item.imagePath}` }}
+                path={item.imagePath}
               />
             </TouchableOpacity>
           </View>
