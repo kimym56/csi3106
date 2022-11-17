@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { authAtom } from '../atoms/auth';
-import { obtainToken } from '../remotes/auth';
+import { createUser, CreateUserParams, CreateUserResult, obtainToken } from '../remotes/auth';
 
 interface UseLoginOptions {
   onError?: () => void;
@@ -25,4 +25,8 @@ export function useLogout() {
   return useCallback(() => {
     update({ type: 'logout' });
   }, [update]);
+}
+
+export function useSignup(options?: UseMutationOptions<CreateUserResult, unknown, CreateUserParams>) {
+  return useMutation(createUser, options);
 }
