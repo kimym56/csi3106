@@ -19,6 +19,5 @@ export async function getStyle(id: number): Promise<Style> {
 }
 
 export async function deleteStyle(id: number): Promise<void> {
-  await new Promise<void>((resolve) => setTimeout(resolve, 3000));
-  throw new Error(`not implemented: deleteStyle(${id})`);
+  await client.delete(`api/v1/style/${id}`);
 }

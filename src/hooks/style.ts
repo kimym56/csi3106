@@ -15,14 +15,14 @@ export function useStyleQuery(id: number) {
   });
 }
 
-export function useStyleDelete({ onSuccess, ...options }: UseMutationOptions<void, unknown, number> = {}) {
+export function useStyleDelete(options?: UseMutationOptions<void, unknown, number>) {
   const client = useQueryClient();
 
   return useMutation(deleteStyle, {
-    onSuccess(data, ...args) {
-      client.removeQueries(['styles']);
-      onSuccess?.(data, ...args);
-    },
     ...options,
+    onSuccess(data, ...args) {
+      client.invalidateQueries(['styles']);
+      options?.onSuccess?.(data, ...args);
+    },
   });
 }
