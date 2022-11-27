@@ -6,3 +6,16 @@ export interface Style {
   uploaderName: string;
   uploadedTime: string;
 }
+
+export interface Shop {
+  id: number;
+  frontImagePath: string;
+  backImagePath: string;
+  detailImagePath: string;
+  title: string;
+  price: number;
+  detail: string;
+  type: string;
+  color: string;
+  time: string;
+}

@@ -37,6 +37,7 @@ const CombinedDefaultTheme = {
   colors: {
     ...NavigationDefaultTheme.colors,
     ...PaperDefaultTheme.colors,
+    primary: Colors.ACCENT,
   },
 };
 

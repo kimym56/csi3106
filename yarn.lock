@@ -4016,6 +4016,7 @@ __metadata:
     react-native: 0.70.3
     react-native-gesture-handler: ^2.7.1
     react-native-image-crop-picker: ^0.38.1
+    react-native-image-picker: ^4.10.0
     react-native-linear-gradient: ^2.6.2
     react-native-pager-view: ^6.0.1
     react-native-paper: ^5.0.0-rc.9
@@ -8844,6 +8845,16 @@ __metadata:
   peerDependencies:
     react-native: ">=0.40.0"
   checksum: e2705cfe5400cf30d372402e1d4933405aacc2cd07fd6fbd25a7a1b31f27ffefd5a033dd6dc71c0b40e62c5f1362919292327912315efc7dcd34bcdc49f1ee12
+  languageName: node
+  linkType: hard
+
+"react-native-image-picker@npm:^4.10.0":
+  version: 4.10.0
+  resolution: "react-native-image-picker@npm:4.10.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 778c1ab980efabbd11a0fd04b6f33dd6288b455696b055b72c9089a3bf953957019e26b4da9a193ab38aeefcf160067fe784a02c69a84510fe1ee6d850f177bf
   languageName: node
   linkType: hard
 

@@ -1,4 +1,5 @@
 import { ParamListBase } from '@react-navigation/native';
+import { Asset } from 'react-native-image-picker';
 
 export const enum ScreenName {
   로그인 = 'login',
@@ -22,6 +23,9 @@ export type ParamList = ParamListBase & {
   [ScreenName.상점_상세]: {
     clothesId: number;
   };
+  [ScreenName.스타일_업로드]: {
+    image: Asset;
+  };
 };
 
 declare global {
@@ -36,4 +40,44 @@ export const Colors = {
   ACCENT: '#6600FF',
   SECONDARY: 'rgba(0, 0, 0, 0.4)',
   WHITE: '#FFFFFF',
+  LIGHTGRAY: '#D0D0D0',
 } as const;
+
+export const TagName = {
+  'a shortsleeve': {
+    kor: '반팔티',
+  },
+  'a onepiece”': {
+    kor: '원피스',
+  },
+  'a skirt': {
+    kor: '스커트',
+  },
+  'a shirts': {
+    kor: '셔츠',
+  },
+  'a padding': {
+    kor: '패딩',
+  },
+  'a coat': {
+    kor: '코트',
+  },
+  'a jacket': {
+    kor: '자켓',
+  },
+  'a accessorie': {
+    kor: '악세사리',
+  },
+  'a bag': {
+    kor: '가방',
+  },
+  'a longsleeve': {
+    kor: '긴팔티',
+  },
+  'a long pants': {
+    kor: '긴바지',
+  },
+  'a short pants': {
+    kor: '반바지',
+  },
+};

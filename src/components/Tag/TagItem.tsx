@@ -1,13 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, ViewProps } from 'react-native';
 import { Colors } from '../../constants';
 
-export interface Props {
+export interface Props extends ViewProps {
   title: string;
 }
 
-export default function TagItem({ title }: Props) {
-  return <Text style={styles.container}>#{title}</Text>;
+export default function TagItem({ title, style }: Props) {
+  return <Text style={[styles.container, style]}>#{title}</Text>;
 }
 
 const styles = StyleSheet.create({
