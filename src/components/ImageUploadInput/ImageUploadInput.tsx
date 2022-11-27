@@ -3,11 +3,11 @@ import { Image, StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react
 import ImagePicker from 'react-native-image-crop-picker';
 import { Colors } from '../../constants';
 import { useImageUploadMutation } from '../../hooks/image';
-import { UploadStyleImageResult } from '../../remotes/style';
+import { UploadImageResult } from '../../remotes/image';
 
 export interface Props {
   style?: StyleProp<ViewStyle>;
-  onSuccess?: (result: UploadStyleImageResult) => void;
+  onSuccess?: (result: UploadImageResult) => void;
 }
 
 export default function ImageUploadInput({ style, onSuccess }: Props) {

@@ -3,20 +3,20 @@ import { ActivityIndicator, Pressable, StyleSheet } from 'react-native';
 import { Modal, Portal } from 'react-native-paper';
 import { Colors } from '../../constants';
 import { TagName } from '../../constants';
-import { useRecommendedTagListQuery } from '../../hooks/style';
+import { useRecommendedTagListQuery } from '../../hooks/image';
 import TagItem from '../Tag/TagItem';
 import TagList from '../Tag/TagList';
 
 export interface Props {
   imagePath: string | undefined;
-  values?: String | null;
-  onChange?: (tag: String) => void;
+  values?: string | null;
+  onChange?: (tag: string) => void;
 }
 
 export default function ImageTagInput({ imagePath, values, onChange }: Props) {
   const { isLoading, isSuccess, data } = useRecommendedTagListQuery({ imagePath });
 
-  const [extraTag, setExtraTag] = useState<null | String>(null);
+  const [extraTag, setExtraTag] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
 
   const showModal = () => setVisible(true);
@@ -47,20 +47,22 @@ export default function ImageTagInput({ imagePath, values, onChange }: Props) {
           <ActivityIndicator color={Colors.ACCENT} size="large" />
         ) : isSuccess ? (
           <>
-            {data.recommendedTags.map((ct, index) => (
-              <Pressable
-                key={index}
-                onPress={() => {
-                  onChange?.(ct);
-                }}
-              >
-                <TagItem style={values === ct && styles.selected} title={TagName[ct as keyof typeof TagName].kor} />
-              </Pressable>
-            ))}
+            {data.recommendedTags
+              .map((ct) => ({ ct, ...TagName[ct as keyof typeof TagName] }))
+              .map(({ ct, kor }, index) => (
+                <Pressable
+                  key={index}
+                  onPress={() => {
+                    onChange?.(ct);
+                  }}
+                >
+                  <TagItem style={values === ct && styles.selected} title={kor ?? ct} />
+                </Pressable>
+              ))}
             <Pressable onPress={showModal}>
               <TagItem
                 style={values === extraTag && styles.selected}
-                title={extraTag ? TagName[extraTag as keyof typeof TagName].kor : 'etc'}
+                title={extraTag ? TagName[extraTag as keyof typeof TagName]?.kor : 'etc'}
               />
             </Pressable>
           </>

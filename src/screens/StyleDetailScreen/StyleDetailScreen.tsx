@@ -16,9 +16,9 @@ export default function StyleDetailScreen() {
   ) : (
     <ScrollView style={styles.container}>
       <View style={styles.captionContainer}>
-        <Text style={styles.uploaderText}>{query.data.uploaderName}님</Text>
+        <Text style={styles.uploaderText}>{query.data.owner}님</Text>
         <DateTimeDisplay style={styles.uploadedTimeText} format="yyyy.M.d.">
-          {query.data.uploadedTime}
+          {query.data.time}
         </DateTimeDisplay>
       </View>
       <ClothesImage style={styles.image} path={query.data.imagePath} />

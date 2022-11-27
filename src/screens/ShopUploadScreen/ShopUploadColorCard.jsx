@@ -1,22 +1,25 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { useController, useFormContext } from 'react-hook-form';
 import { Card } from 'react-native-paper';
 import { Colors } from '../../constants';
 
-export default function ShopUploadColorCard({ setValue, watch }) {
+export default function ShopUploadColorCard() {
+  const { field } = useController({ name: 'color' });
+
   return (
     <Card mode="elevated" elevation={4} style={styles.container}>
       <Card.Content>
         <Text style={styles.text}>COLOR PICK</Text>
         <View style={styles.colorContainer}>
-          {Object.entries(palette).map(([key, value]) => (
+          {Object.entries(palette).map(([key, color]) => (
             <TouchableOpacity
               key={key}
               onPress={() => {
-                setValue('color', key);
+                field.onChange(key);
               }}
-              style={[styles.color, { backgroundColor: value }, watch('color') == key && styles.selected]}
+              style={[styles.color, { backgroundColor: color }, field.value === key && styles.selected]}
             />
           ))}
         </View>

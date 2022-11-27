@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button, Card } from 'react-native-paper';
 import { ScreenName } from '../../constants';
@@ -13,7 +13,8 @@ import ShopUploadInfoCard from './ShopUploadInfoCard';
 export default function StyleRegisterScreen() {
   const { navigate, goBack } = useNavigation();
 
-  const { control, setFocus, watch, setValue, handleSubmit } = useForm();
+  const form = useForm();
+  const { handleSubmit } = form;
 
   const create = useShopCreate({
     onSuccess(data) {
@@ -25,30 +26,29 @@ export default function StyleRegisterScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView style={styles.container}>
-        <ShopUploadInfoCard control={control} setFocus={setFocus} />
-        <ShopUploadColorCard watch={watch} setValue={setValue} />
-        <ShopUploadImageCard watch={watch} setValue={setValue} />
-        <Card>
-          <Button
-            style={styles.button}
-            contentStyle={{ height: '100%' }}
-            mode={'contained'}
-            //mode={classTag ? 'contained' : 'outlined'}
-            //disabled={classTag == null}
-            onPress={handleSubmit(
-              (values) => {
-                values.price = parseInt(values.price);
-                console.log(values);
-                create.mutate(values);
-              },
-              () => {
-                console.log('error');
-              },
-            )}
-          >
-            <Text style={{ fontSize: 18, height: '100%' }}>Shop 등록하기</Text>
-          </Button>
-        </Card>
+        <FormProvider {...form}>
+          <ShopUploadInfoCard />
+          <ShopUploadColorCard />
+          <ShopUploadImageCard />
+          <Card>
+            <Button
+              style={styles.button}
+              contentStyle={{ height: '100%' }}
+              mode={'contained'}
+              onPress={handleSubmit(
+                (values) => {
+                  values.price = parseInt(values.price);
+                  create.mutate(values);
+                },
+                () => {
+                  console.log('error');
+                },
+              )}
+            >
+              <Text style={{ fontSize: 18, height: '100%' }}>Shop 등록하기</Text>
+            </Button>
+          </Card>
+        </FormProvider>
       </ScrollView>
     </SafeAreaView>
   );

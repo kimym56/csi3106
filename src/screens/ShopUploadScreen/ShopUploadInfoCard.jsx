@@ -1,17 +1,19 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { useFormContext } from 'react-hook-form';
 import { Card, Text, TextInput } from 'react-native-paper';
 import TextInputController from '../../components/TextInputController';
 import { Colors } from '../../constants';
 
-export default function ShopUploadInfoCard({ control, setFocus }) {
+export default function ShopUploadInfoCard() {
+  const { setFocus } = useFormContext();
+
   return (
     <Card mode="elevated" elevation={4} style={styles.container}>
       <Card.Content>
         <Text style={styles.text}>Title</Text>
         <TextInputController
           as={TextInput}
-          control={control}
           mode="outlined"
           name="title"
           rules={{ required: true }}
@@ -25,7 +27,6 @@ export default function ShopUploadInfoCard({ control, setFocus }) {
         <Text style={styles.text}>Price</Text>
         <TextInputController
           as={TextInput}
-          control={control}
           mode="outlined"
           name="price"
           keyboardType="numeric"
@@ -41,7 +42,6 @@ export default function ShopUploadInfoCard({ control, setFocus }) {
         <TextInputController
           style={styles.details}
           as={TextInput}
-          control={control}
           mode="outlined"
           name="detail"
           rules={{ required: true }}

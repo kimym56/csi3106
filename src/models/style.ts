@@ -3,8 +3,8 @@ export interface Style {
   imagePath: string;
   type: string;
   size: string;
-  uploaderName: string;
-  uploadedTime: string;
+  owner: string;
+  time: string;
 }
 
 export interface Shop {

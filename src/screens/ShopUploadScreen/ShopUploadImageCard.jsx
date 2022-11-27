@@ -1,43 +1,68 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
+import { Controller, useFormContext } from 'react-hook-form';
 import { Card } from 'react-native-paper';
 import ImageTagInput from '../../components/ImageTagInput';
 import ImageUploadInput from '../../components/ImageUploadInput';
 import { Colors } from '../../constants';
 
-export default function ShopUploadImageCard({ setValue, watch }) {
+export default function ShopUploadImageCard() {
+  const { watch } = useFormContext();
+  const frontImagePath = watch('frontImagePath');
+
   return (
     <Card mode="elevated" elevation={4} style={styles.container}>
       <Card.Content>
         <Text style={styles.text}>FRONT</Text>
-        <ImageUploadInput
-          style={styles.imageContainer}
-          onSuccess={(path) => {
-            setValue('frontImagePath', path.imagePath);
-          }}
+        <Controller
+          name="frontImagePath"
+          render={({ field: { onChange } }) => (
+            <ImageUploadInput
+              style={styles.imageContainer}
+              onSuccess={(path) => {
+                onChange(path.imagePath);
+              }}
+            />
+          )}
         />
-        <ImageTagInput
-          imagePath={watch('frontImagePath')}
-          values={watch('type')}
-          onChange={(type) => {
-            setValue('type', type);
-          }}
+        <Controller
+          name="type"
+          render={({ field: { value, onChange } }) => (
+            <ImageTagInput
+              imagePath={frontImagePath}
+              values={value}
+              onChange={(type) => {
+                onChange(type);
+              }}
+            />
+          )}
         />
 
         <Text style={styles.text}>BACK</Text>
-        <ImageUploadInput
-          style={styles.imageContainer}
-          onSuccess={(path) => {
-            setValue('backImagePath', path.imagePath);
-          }}
+
+        <Controller
+          name="backImagePath"
+          render={({ field: { onChange } }) => (
+            <ImageUploadInput
+              style={styles.imageContainer}
+              onSuccess={(path) => {
+                onChange(path.imagePath);
+              }}
+            />
+          )}
         />
 
         <Text style={styles.text}>DETAIL</Text>
-        <ImageUploadInput
-          style={styles.imageContainer}
-          onSuccess={(path) => {
-            setValue('detailImagePath', path.imagePath);
-          }}
+        <Controller
+          name="detailImagePath"
+          render={({ field: { onChange } }) => (
+            <ImageUploadInput
+              style={styles.imageContainer}
+              onSuccess={(path) => {
+                onChange(path.imagePath);
+              }}
+            />
+          )}
         />
       </Card.Content>
     </Card>
