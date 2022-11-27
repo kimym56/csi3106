@@ -1,18 +1,15 @@
 import React from 'react';
 import { FlatList, Image, StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useQuery } from '@tanstack/react-query';
 import { IMAGE_URL_PREFIX, ScreenName } from '../../constants';
-import { client } from '../../utils/network';
+import { useMyShopListQuery } from '../../hooks/shop';
 
 export default function ShopListScreen() {
   const layout = useWindowDimensions();
   const { navigate } = useNavigation();
 
-  const { data: DATA } = useQuery({
-    queryKey: ['shop-list'],
-    queryFn: () => client.get('api/v1/shop/my_market').json(),
-  });
+  const { data: DATA } = useMyShopListQuery();
+
   return (
     <View>
       <FlatList
