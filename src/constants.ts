@@ -48,7 +48,7 @@ export const TagName = {
   'a shortsleeve': {
     kor: '반팔티',
   },
-  'a onepiece”': {
+  'a onepiece': {
     kor: '원피스',
   },
   'a skirt': {
@@ -80,5 +80,8 @@ export const TagName = {
   },
   'a short pants': {
     kor: '반바지',
+  },
+  'a sleeveless': {
+    kor: '민소매',
   },
 };

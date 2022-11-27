@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ActivityIndicator, Pressable, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Modal, Portal } from 'react-native-paper';
 import { Colors } from '../../constants';
 import { TagName } from '../../constants';
@@ -43,30 +43,35 @@ export default function ImageTagInput({ imagePath, values, onChange }: Props) {
         </Modal>
       </Portal>
       <TagList style={styles.tagContainer}>
-        {isLoading ? (
-          <ActivityIndicator color={Colors.ACCENT} size="large" />
-        ) : isSuccess ? (
-          <>
-            {data.recommendedTags
-              .map((ct) => ({ ct, ...TagName[ct as keyof typeof TagName] }))
-              .map(({ ct, kor }, index) => (
-                <Pressable
-                  key={index}
-                  onPress={() => {
-                    onChange?.(ct);
-                  }}
-                >
-                  <TagItem style={values === ct && styles.selected} title={kor ?? ct} />
-                </Pressable>
-              ))}
-            <Pressable onPress={showModal}>
-              <TagItem
-                style={values === extraTag && styles.selected}
-                title={extraTag ? TagName[extraTag as keyof typeof TagName]?.kor : 'etc'}
-              />
-            </Pressable>
-          </>
-        ) : null}
+        {imagePath &&
+          (isLoading ? (
+            <View style={styles.tagContainer}>
+              <Text style={styles.text}>선택한 옷을 분석하는 중이에요</Text>
+              <ActivityIndicator color={Colors.ACCENT} />
+            </View>
+          ) : isSuccess ? (
+            <>
+              {data.recommendedTags.map((ct, index) => {
+                let tagKor = ct in TagName ? TagName[ct as keyof typeof TagName].kor : ct;
+                return (
+                  <Pressable
+                    key={index}
+                    onPress={() => {
+                      onChange?.(ct);
+                    }}
+                  >
+                    <TagItem style={values === ct && styles.selected} title={tagKor} />
+                  </Pressable>
+                );
+              })}
+              <Pressable onPress={showModal}>
+                <TagItem
+                  style={values === extraTag && styles.selected}
+                  title={extraTag ? TagName[extraTag as keyof typeof TagName]?.kor : 'etc'}
+                />
+              </Pressable>
+            </>
+          ) : null)}
       </TagList>
     </>
   );
@@ -83,5 +88,10 @@ const styles = StyleSheet.create({
   selected: {
     backgroundColor: Colors.ACCENT,
     color: Colors.WHITE,
+  },
+  text: {
+    color: Colors.ACCENT,
+    fontWeight: '800',
+    fontSize: 20,
   },
 });

@@ -1,6 +1,8 @@
 import React from 'react';
-import { Image, StyleProp, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { Image, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
+import { Text } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/Feather';
 import { Colors } from '../../constants';
 import { useImageUploadMutation } from '../../hooks/image';
 import { UploadImageResult } from '../../remotes/image';
@@ -20,7 +22,14 @@ export default function ImageUploadInput({ style, onSuccess }: Props) {
 
   return (
     <TouchableOpacity style={[style, mutation.status === 'idle' && styles.idle]} onPress={handleClick}>
-      {mutation.status !== 'idle' && <Image style={styles.image} source={{ uri: mutation.variables?.path }} />}
+      {mutation.status !== 'idle' ? (
+        <Image style={styles.image} source={{ uri: mutation.variables?.path }} />
+      ) : (
+        <View style={styles.iconContainer}>
+          <Icon name="camera" size={80} color={Colors.ACCENT} />
+          <Text style={{ color: Colors.ACCENT }}>클릭하여 사진 찍기</Text>
+        </View>
+      )}
     </TouchableOpacity>
   );
 }
@@ -36,5 +45,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.LIGHTGRAY,
     width: '100%',
     height: '100%',
+  },
+  iconContainer: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
