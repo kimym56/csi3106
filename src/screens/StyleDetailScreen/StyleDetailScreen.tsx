@@ -1,11 +1,13 @@
 import React from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ClothesImage from '../../components/ClothesImage';
 import DateTimeDisplay from '../../components/DateTimeDisplay';
 import Tag from '../../components/Tag';
 import { Colors, ParamList, ScreenName } from '../../constants';
 import { useStyleQuery } from '../../hooks/style';
+import ShopRecommendationBottomSheet from './ShopRecommendationBottomSheet';
 
 export default function StyleDetailScreen() {
   const { params } = useRoute<RouteProp<ParamList, ScreenName.스타일_상세>>();
@@ -14,18 +16,21 @@ export default function StyleDetailScreen() {
   return query.data == null ? (
     <ActivityIndicator />
   ) : (
-    <ScrollView style={styles.container}>
-      <View style={styles.captionContainer}>
-        <Text style={styles.uploaderText}>{query.data.owner}님</Text>
-        <DateTimeDisplay style={styles.uploadedTimeText} format="yyyy.M.d.">
-          {query.data.time}
-        </DateTimeDisplay>
-      </View>
-      <ClothesImage style={styles.image} path={query.data.imagePath} />
-      <Tag.List style={styles.tagContainer}>
-        <Tag.Item title={query.data.type} />
-      </Tag.List>
-    </ScrollView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ScrollView style={styles.container}>
+        <View style={styles.captionContainer}>
+          <Text style={styles.uploaderText}>{query.data.owner}님</Text>
+          <DateTimeDisplay style={styles.uploadedTimeText} format="yyyy.M.d.">
+            {query.data.time}
+          </DateTimeDisplay>
+        </View>
+        <ClothesImage style={styles.image} path={query.data.imagePath} />
+        <Tag.List style={styles.tagContainer}>
+          <Tag.Item title={query.data.type} />
+        </Tag.List>
+      </ScrollView>
+      <ShopRecommendationBottomSheet styleId={params.styleId} />
+    </GestureHandlerRootView>
   );
 }
 

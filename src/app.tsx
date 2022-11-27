@@ -14,6 +14,7 @@ import { Colors, ScreenName } from './constants';
 import { AuthStatus } from './models/auth';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
+import MarketScreen from './screens/MarketScreen';
 import MyPageScreen from './screens/MyPageScreen';
 import ShopDetailScreen from './screens/ShopDetailScreen';
 import ShopUploadScreen from './screens/ShopUploadScreen';
@@ -27,7 +28,8 @@ const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
 
 const bottomTabIcons: Record<string, string> = {
-  [ScreenName.홈]: 'home',
+  [ScreenName.홈]: 'grid',
+  [ScreenName.마켓]: 'shopping-cart',
   [ScreenName.마이페이지]: 'user',
 };
 
@@ -67,7 +69,9 @@ function RootNavigator() {
   const { status } = useAtomValue(authAtom);
 
   return (
-    <Stack.Navigator screenOptions={{ headerTitleAlign: 'center', headerTintColor: Colors.ACCENT }}>
+    <Stack.Navigator
+      screenOptions={{ headerTitleAlign: 'center', headerTitleStyle: { fontSize: 16, fontWeight: '800' } }}
+    >
       {status === AuthStatus.INVALID ? (
         <>
           <Stack.Screen name={ScreenName.로그인} options={{ headerShown: false }} component={LoginScreen} />
@@ -89,7 +93,11 @@ function RootNavigator() {
             options={{ title: 'style 업로드' }}
             component={StyleUploadScreen}
           />
-          <Stack.Screen name={ScreenName.상점_상세} options={{ title: 'shop 상세' }} component={ShopDetailScreen} />
+          <Stack.Screen
+            name={ScreenName.상점_상세}
+            options={{ title: '상품 상세 페이지' }}
+            component={ShopDetailScreen}
+          />
           <Stack.Screen name={ScreenName.상점_업로드} options={{ title: 'shop 업로드' }} component={ShopUploadScreen} />
         </>
       )}
@@ -105,11 +113,35 @@ function MainNavigator() {
           const name = bottomTabIcons[route.name];
           return name != null ? <Icon name={name} size={size} color={color} /> : null;
         },
-        tabBarShowLabel: false,
       })}
     >
-      <BottomTab.Screen name={ScreenName.홈} options={{ headerShown: false }} component={HomeScreen} />
-      <BottomTab.Screen name={ScreenName.마이페이지} options={{ headerTitle: '마이페이지' }} component={MyPageScreen} />
+      <BottomTab.Screen
+        name={ScreenName.홈}
+        options={{ tabBarLabel: '홈', headerShown: false }}
+        component={HomeScreen}
+      />
+      <BottomTab.Screen
+        name={ScreenName.마켓}
+        options={{
+          tabBarLabel: '마켓',
+          headerTitle: '마켓',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            elevation: 14,
+            shadowColor: 'black',
+            shadowOffset: { width: 0, height: 4 },
+            shadowRadius: 6,
+            shadowOpacity: 0.1,
+          },
+          headerRight: () => <MarketScreen.HeaderRight />,
+        }}
+        component={MarketScreen}
+      />
+      <BottomTab.Screen
+        name={ScreenName.마이페이지}
+        options={{ tabBarLabel: 'My', headerTitle: '마이페이지' }}
+        component={MyPageScreen}
+      />
     </BottomTab.Navigator>
   );
 }

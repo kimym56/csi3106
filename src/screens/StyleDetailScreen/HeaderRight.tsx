@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { ToastAndroid } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { HeaderButtonProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 import { Button, Dialog, IconButton, Paragraph, Portal } from 'react-native-paper';
 import { ParamList, ScreenName } from '../../constants';
 import { useStyleDelete } from '../../hooks/style';
 
-export default function HeaderRight({ tintColor }: HeaderButtonProps) {
+export interface Props {
+  tintColor?: string;
+  canGoBack: boolean;
+}
+
+export default function HeaderRight({ tintColor }: Props) {
   const navigate = useNavigation();
   const { params } = useRoute<RouteProp<ParamList, ScreenName.스타일_상세>>();
   const [isModalVisible, setModalVisible] = useState(false);

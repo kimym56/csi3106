@@ -14,6 +14,7 @@ export const enum ScreenName {
   상점_상세 = 'shop-detail',
   상점_업로드 = 'shop-upload',
   마이페이지 = 'mypage',
+  마켓 = 'market',
 }
 
 export type ParamList = ParamListBase & {

@@ -11,9 +11,8 @@ export default function ShopListScreen() {
 
   const { data: DATA } = useQuery({
     queryKey: ['shop-list'],
-    queryFn: () => client.get('api/v1/closet/shop').json(),
+    queryFn: () => client.get('api/v1/shop/my_market').json(),
   });
-
   return (
     <View>
       <FlatList
@@ -23,7 +22,7 @@ export default function ShopListScreen() {
             <TouchableOpacity onPress={() => navigate(ScreenName.상점_상세, { clothesId: item.id })}>
               <Image
                 style={[styles.imageStyle, { width: layout.width / 3, height: ((layout.width / 3) * 4) / 3 }]}
-                source={{ uri: `${IMAGE_URL_PREFIX}${item.image}` }}
+                source={{ uri: `${IMAGE_URL_PREFIX}${item.frontImagePath}` }}
               />
             </TouchableOpacity>
           </View>
@@ -40,6 +39,7 @@ const styles = StyleSheet.create({
   flatView: {
     flex: 1,
     flexDirection: 'column',
+    borderWidth: 1,
   },
   imageStyle: {
     justifyContent: 'center',
