@@ -43,7 +43,6 @@ export default function ShopRecommendationBottomSheet({ styleId }: Props) {
             </View>
           )}
           numColumns={2}
-          keyExtractor={(index) => index.toString()}
         />
       </View>
     </BottomSheet>

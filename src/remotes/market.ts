@@ -1,8 +1,14 @@
 import { Market } from '../models/market';
 import { client } from '../utils/network';
 
-export async function getMarketList() {
-  return client.get('api/v1/styles/me').json();
+export interface filterParams {
+  priceList: Array<Number>;
+  type: string;
+  color: string;
+}
+
+export async function getMarketList(params: filterParams) {
+  return client.get('api/v1/shop/all_market_filtered').json();
 }
 
 export async function getMarket(id: number): Promise<Market> {

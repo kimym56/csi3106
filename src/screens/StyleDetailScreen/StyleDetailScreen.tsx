@@ -37,6 +37,7 @@ export default function StyleDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 26,
+    backgroundColor: 'white',
   },
   captionContainer: {
     flexDirection: 'row',

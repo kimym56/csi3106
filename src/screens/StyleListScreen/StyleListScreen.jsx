@@ -26,7 +26,6 @@ export default function StyleListScreen() {
         )}
         //Setting the number of column
         numColumns={3}
-        keyExtractor={(index) => index.toString()}
       />
     </View>
   );

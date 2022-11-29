@@ -11,8 +11,9 @@ export default function ShopUploadInfoCard() {
   return (
     <Card mode="elevated" elevation={4} style={styles.container}>
       <Card.Content>
-        <Text style={styles.text}>Title</Text>
+        <Text style={styles.text}>TITLE</Text>
         <TextInputController
+          style={{ height: 30, fontSize: 12, lineHeight: 18 }}
           as={TextInput}
           mode="outlined"
           name="title"
@@ -24,8 +25,9 @@ export default function ShopUploadInfoCard() {
             setFocus('price');
           }}
         />
-        <Text style={styles.text}>Price</Text>
+        <Text style={styles.text}>PRICE</Text>
         <TextInputController
+          style={{ height: 30, fontSize: 12, lineHeight: 18 }}
           as={TextInput}
           mode="outlined"
           name="price"
@@ -38,14 +40,14 @@ export default function ShopUploadInfoCard() {
             setFocus('detail');
           }}
         />
-        <Text style={styles.text}>Details</Text>
+        <Text style={styles.text}>DETAILS</Text>
         <TextInputController
           style={styles.details}
           as={TextInput}
           mode="outlined"
           name="detail"
           rules={{ required: true }}
-          placeholder="상품에 대해 설명헤주세요"
+          placeholder="상품에 대해 설명해주세요"
           returnKeyType="next"
           blurOnSubmit={false}
           dense={true}
@@ -66,7 +68,9 @@ const styles = StyleSheet.create({
   },
   textinput: {},
   details: {
-    height: 100,
+    height: 72,
+    fontSize: 12,
+    lineHeight: 18,
     paddingVertical: 2,
   },
 });

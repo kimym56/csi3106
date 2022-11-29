@@ -26,7 +26,6 @@ export default function ShopListScreen() {
         )}
         //Setting the number of column
         numColumns={3}
-        keyExtractor={(index) => index.toString()}
       />
     </View>
   );
@@ -34,9 +33,8 @@ export default function ShopListScreen() {
 
 const styles = StyleSheet.create({
   flatView: {
-    flex: 1,
+    flex: 1 / 3,
     flexDirection: 'column',
-    borderWidth: 1,
   },
   imageStyle: {
     justifyContent: 'center',

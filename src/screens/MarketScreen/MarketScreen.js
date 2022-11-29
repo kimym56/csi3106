@@ -5,13 +5,17 @@ import { Slider } from '@miblanchard/react-native-slider';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Feather';
+import { useMarketListQuery } from '../../hooks/market';
 import { useMyStyleListQuery } from '../../hooks/style';
 import MarketListScreen from '../MarketListScreen';
 export default function MarketScreen() {
+  // const query = useMarketListQuery({ priceList: sliderValue, type: filterValue, color: '' });
   const [text, setText] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const [sliderValue, setSliderValue] = useState([0, 500000]);
   const [filterValue, setFilterValue] = useState(0);
+
+  // console.log('query : ', query?.data);
   // 해야될것
   // 상의~가방 필터 선택시 아래 필터 적용되도록
   // 검색어 입력시 아래 필터 적용되도록

@@ -6,11 +6,12 @@ import {
   getRecommendedMarketList,
   GetRecommendedMarketListParams,
 } from '../remotes/market';
+import { filterParams } from './../remotes/market';
 
-export function useMarketListQuery() {
+export function useMarketListQuery(params: filterParams) {
   return useQuery({
     queryKey: ['markets'],
-    queryFn: () => getMarketList(),
+    queryFn: () => getMarketList(params),
   });
 }
 

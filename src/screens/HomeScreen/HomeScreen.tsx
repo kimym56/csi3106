@@ -30,17 +30,19 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   topContainer: {
-    padding: 16,
+    margin: 10,
     backgroundColor: '#fff',
+    borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 0,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowRadius: 6,
+    shadowOpacity: 1,
     elevation: 5,
   },
 });

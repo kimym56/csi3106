@@ -26,8 +26,8 @@ export default function ImageUploadInput({ style, onSuccess }: Props) {
         <Image style={styles.image} source={{ uri: mutation.variables?.path }} />
       ) : (
         <View style={styles.iconContainer}>
-          <Icon name="camera" size={80} color={Colors.ACCENT} />
-          <Text style={{ color: Colors.ACCENT }}>클릭하여 사진 찍기</Text>
+          <Icon name="camera" size={35} color={Colors.ACCENT} />
+          <Text style={{ color: Colors.ACCENT, fontSize: 10, fontWeight: '400' }}>클릭하여 사진 찍기</Text>
         </View>
       )}
     </TouchableOpacity>

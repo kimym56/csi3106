@@ -46,8 +46,6 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     borderRadius: 15,
-    borderColor: '#808080',
-    borderWidth: 2,
     margin: 10,
   },
   selected: {
