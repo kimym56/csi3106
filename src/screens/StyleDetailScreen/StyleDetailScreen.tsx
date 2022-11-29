@@ -5,7 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ClothesImage from '../../components/ClothesImage';
 import DateTimeDisplay from '../../components/DateTimeDisplay';
 import Tag from '../../components/Tag';
-import { Colors, ParamList, ScreenName } from '../../constants';
+import { Colors, ParamList, ScreenName, TagName } from '../../constants';
 import { useStyleQuery } from '../../hooks/style';
 import ShopRecommendationBottomSheet from './ShopRecommendationBottomSheet';
 
@@ -26,7 +26,7 @@ export default function StyleDetailScreen() {
         </View>
         <ClothesImage style={styles.image} path={query.data.imagePath} />
         <Tag.List style={styles.tagContainer}>
-          <Tag.Item title={query.data.type} />
+          <Tag.Item title={TagName[query.data.type as keyof typeof TagName].kor} />
         </Tag.List>
       </ScrollView>
       <ShopRecommendationBottomSheet styleId={params.styleId} />

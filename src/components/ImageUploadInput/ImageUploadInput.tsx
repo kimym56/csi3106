@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   image: {
-    resizeMode: 'contain',
     backgroundColor: Colors.LIGHTGRAY,
     width: '100%',
     height: '100%',

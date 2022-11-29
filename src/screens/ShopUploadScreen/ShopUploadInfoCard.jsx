@@ -48,9 +48,9 @@ export default function ShopUploadInfoCard() {
           name="detail"
           rules={{ required: true }}
           placeholder="상품에 대해 설명해주세요"
-          returnKeyType="next"
           blurOnSubmit={false}
           dense={true}
+          multiline
         />
       </Card.Content>
     </Card>

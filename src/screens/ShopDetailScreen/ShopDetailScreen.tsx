@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import PaginationDot from 'react-native-animated-pagination-dot';
@@ -6,9 +6,11 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Divider, IconButton } from 'react-native-paper';
 import Carousel from 'react-native-reanimated-carousel';
 import Tag from '../../components/Tag';
-import { IMAGE_URL_PREFIX, ParamList, ScreenName } from '../../constants';
+import { IMAGE_URL_PREFIX, ParamList, ScreenName, TagName } from '../../constants';
 import { useShopQuery } from '../../hooks/shop';
 export default function ShopDetailScreen() {
+  const [imageIndex, setImageIndex] = useState<number>();
+
   const { params } = useRoute<RouteProp<ParamList, ScreenName.상점_상세>>();
   const query = useShopQuery(params.clothesId);
   const DATA = [query.data?.frontImagePath, query.data?.backImagePath, query.data?.detailImagePath];
@@ -27,15 +29,19 @@ export default function ShopDetailScreen() {
             autoPlay={true}
             autoPlayInterval={3000}
             data={DATA}
-            renderItem={({ item, index }) => (
+            onSnapToItem={(index) => {
+              setImageIndex(index);
+            }}
+            renderItem={({ item }) => (
               <View style={{ flex: 1, borderRadius: 8 }}>
                 <Image source={{ uri: `${IMAGE_URL_PREFIX}${item}` }} style={{ flex: 1, borderRadius: 8 }} />
-                <View style={{ bottom: 24, alignSelf: 'center' }}>
-                  <PaginationDot activeDotColor={'#6600FF'} curPage={index} maxPage={DATA.length} />
-                </View>
               </View>
             )}
           />
+
+          <View style={{ bottom: 24, alignSelf: 'center' }}>
+            <PaginationDot activeDotColor={'#6600FF'} curPage={imageIndex} maxPage={DATA.length} />
+          </View>
         </View>
         <Divider bold={true} style={{ marginHorizontal: 16, marginBottom: 4 }} />
         <View style={{ marginVertical: 12, marginHorizontal: 24 }}>
@@ -55,7 +61,7 @@ export default function ShopDetailScreen() {
           </View>
           <Text style={{ color: 'black', fontWeight: '800', fontSize: 18 }}>{query.data.title}</Text>
           <Tag.List style={styles.tagContainer}>
-            <Tag.Item title={query.data.type} />
+            <Tag.Item title={TagName[query.data.type as keyof typeof TagName].kor} />
           </Tag.List>
           <Text style={{ color: 'black' }}>{query.data.detail}</Text>
         </View>
