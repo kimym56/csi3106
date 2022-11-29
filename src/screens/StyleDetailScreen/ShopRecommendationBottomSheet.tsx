@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { Text } from 'react-native-paper';
+import ClothesImage from '../../components/ClothesImage';
 import { useRecommendedMarketListQuery } from '../../hooks/market';
 
 export interface Props {
@@ -38,7 +39,7 @@ export default function ShopRecommendationBottomSheet({ styleId }: Props) {
           renderItem={({ item }) => (
             <View style={styles.flatView}>
               <Text>{item.id}</Text>
-              <View style={styles.imageStyle} />
+              {item.frontImagePath != null && <ClothesImage style={styles.imageStyle} path={item.frontImagePath} />}
             </View>
           )}
           numColumns={2}

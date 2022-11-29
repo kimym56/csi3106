@@ -27,5 +27,5 @@ export interface GetRecommendedMarketListParams {
 }
 
 export async function getRecommendedMarketList({ styleId }: GetRecommendedMarketListParams) {
-  return client.get(`api/v1/style/${styleId}/recommend-clothes`).json<Market[]>();
+  return client.post(`api/v1/style/${styleId}/recommend-clothes`).json<Market[]>();
 }

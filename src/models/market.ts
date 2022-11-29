@@ -1,6 +1,6 @@
 export interface Market {
   id: number;
-  imagePath: string;
+  frontImagePath: string;
   type: string;
   size: string;
   uploaderName: string;
