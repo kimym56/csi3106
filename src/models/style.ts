@@ -9,20 +9,10 @@ export interface Style {
 
 export interface Shop {
   id: number;
-  frontImagePath: string;
-  backImagePath: string;
-  detailImagePath: string;
-  title: string;
-  price: number;
-  detail: string;
-  type: string;
-  color: string;
-  time: string;
-}
-
-export interface Shop {
-  id: number;
-  owner: { owner_id: number; owner_name: string };
+  owner: {
+    owner_id: number;
+    owner_name: string;
+  };
   frontImagePath: string;
   backImagePath: string;
   detailImagePath: string;
@@ -34,4 +24,10 @@ export interface Shop {
   time: string;
   deleted: boolean;
   soldout: boolean;
+}
+
+export interface Comment {
+  userId: number;
+  author: string;
+  comment: string;
 }

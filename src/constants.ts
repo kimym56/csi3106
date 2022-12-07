@@ -1,5 +1,4 @@
 import { ParamListBase } from '@react-navigation/native';
-import { Asset } from 'react-native-image-picker';
 
 export const enum ScreenName {
   로그인 = 'login',
@@ -23,9 +22,6 @@ export type ParamList = ParamListBase & {
   };
   [ScreenName.상점_상세]: {
     clothesId: number;
-  };
-  [ScreenName.스타일_업로드]: {
-    image: Asset;
   };
 };
 

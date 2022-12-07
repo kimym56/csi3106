@@ -9,7 +9,6 @@ export default function ShopListScreen() {
   const { navigate } = useNavigation();
 
   const { data: DATA } = useMyShopListQuery();
-
   return (
     <View>
       <FlatList

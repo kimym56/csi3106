@@ -1,7 +1,21 @@
 import { useMutation, UseMutationOptions, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Shop } from '../models/style';
-import { createShop, CreateShopParams } from '../remotes/shop';
+import { Comment, Shop } from '../models/style';
+import { createComment, CreateCommentParams, createShop, CreateShopParams, getCommentList } from '../remotes/shop';
 import { getMyShopList, getShop } from '../remotes/shop';
+
+export function useMyShopListQuery() {
+  return useQuery({
+    queryKey: ['shops'],
+    queryFn: () => getMyShopList(),
+  });
+}
+
+export function useShopQuery(id: number) {
+  return useQuery({
+    queryKey: ['shop', id],
+    queryFn: () => getShop(id),
+  });
+}
 
 export function useShopCreate(options?: UseMutationOptions<Shop, unknown, CreateShopParams>) {
   const client = useQueryClient();
@@ -15,16 +29,21 @@ export function useShopCreate(options?: UseMutationOptions<Shop, unknown, Create
   });
 }
 
-export function useMyShopListQuery() {
+export function useShopCommentQuery(id: number) {
   return useQuery({
-    queryKey: ['shops'],
-    queryFn: () => getMyShopList(),
+    queryKey: ['comments', id],
+    queryFn: () => getCommentList(id),
   });
 }
 
-export function useShopQuery(id: number) {
-  return useQuery({
-    queryKey: ['shop', id],
-    queryFn: () => getShop(id),
+export function useShopCommentCreate(options?: UseMutationOptions<Comment, unknown, CreateCommentParams>) {
+  const client = useQueryClient();
+
+  return useMutation(createComment, {
+    ...options,
+    onSuccess(...args) {
+      client.invalidateQueries(['comments']);
+      options?.onSuccess?.(...args);
+    },
   });
 }

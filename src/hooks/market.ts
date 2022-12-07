@@ -1,38 +1,30 @@
 import { useMutation, UseMutationOptions, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
-  deleteMarket,
-  getMarket,
-  getMarketList,
-  getRecommendedMarketList,
-  GetRecommendedMarketListParams,
-} from '../remotes/market';
-import { filterParams } from './../remotes/market';
+  deleteShop,
+  getRecommendedShopList,
+  GetRecommendedShopListParams,
+  getShopList,
+  GetShopListParams,
+} from '../remotes/shop';
 
-export function useMarketListQuery(params: filterParams) {
+export function useMarketListQuery(params: GetShopListParams) {
   return useQuery({
     queryKey: ['markets'],
-    queryFn: () => getMarketList(params),
+    queryFn: () => getShopList(params),
   });
 }
 
-export function useRecommendedMarketListQuery(params: GetRecommendedMarketListParams) {
+export function useRecommendedMarketListQuery(params: GetRecommendedShopListParams) {
   return useQuery({
     queryKey: ['recommended-market-list', params],
-    queryFn: () => getRecommendedMarketList(params),
-  });
-}
-
-export function useMarketQuery(id: number) {
-  return useQuery({
-    queryKey: ['markets', id],
-    queryFn: () => getMarket(id),
+    queryFn: () => getRecommendedShopList(params),
   });
 }
 
 export function useMarketDelete(options?: UseMutationOptions<void, unknown, number>) {
   const client = useQueryClient();
 
-  return useMutation(deleteMarket, {
+  return useMutation(deleteShop, {
     ...options,
     onSuccess(data, ...args) {
       client.invalidateQueries(['markets']);

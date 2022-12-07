@@ -1,19 +1,44 @@
-import { Shop } from '../models/style';
+import { Comment, Shop } from '../models/style';
 import { client } from '../utils/network';
 
-export async function getMyShopList() {
+export async function getMyShopList(): Promise<Shop[]> {
   return client.get('api/v1/shop/my_market').json();
 }
 
-export async function getShop(id: number): Promise<Shop> {
-  const data = await client.get(`api/v1/shop/${id}`).json<Record<string, unknown>>();
+export interface GetRecommendedShopListParams {
+  styleId: number;
+}
 
-  // TODO(@yuseong.chp):
-  //  아직 서버에서 전달해주지 않는 데이터를 임시로 채웁니다.
-  //  https://csi3106.slack.com/archives/C04381SPVUZ/p1668521091204869
-  return {
-    ...data,
-  } as unknown as Shop;
+export async function getRecommendedShopList({ styleId }: GetRecommendedShopListParams): Promise<Shop[]> {
+  return client.post(`api/v1/style/${styleId}/recommend-clothes`).json();
+}
+
+export interface GetShopListParams {
+  priceList?: number[];
+  type?: string;
+  color?: string;
+}
+
+export async function getShopList(params: GetShopListParams = {}): Promise<Shop[]> {
+  const searchParams = new URLSearchParams();
+
+  if (params.priceList != null && params.priceList.length > 0) {
+    searchParams.set('priceList', params.priceList.join(','));
+  }
+
+  if (params.type != null) {
+    searchParams.set('type', params.type);
+  }
+
+  if (params.color != null) {
+    searchParams.set('color', params.color);
+  }
+
+  return client.get('api/v1/shop/all_market_filtered', { searchParams }).json();
+}
+
+export async function getShop(id: number): Promise<Shop> {
+  return client.get(`api/v1/shop/${id}`).json<Shop>();
 }
 
 export interface CreateShopParams {
@@ -33,4 +58,23 @@ export function createShop(params: CreateShopParams): Promise<Shop> {
 
 export async function deleteShop(id: number): Promise<void> {
   await client.delete(`api/v1/shop/${id}`);
+}
+
+export async function getCommentList(id: number): Promise<Comment[]> {
+  return client.get(`api/v1/shop/${id}/comment`).json();
+}
+
+export interface CreateCommentParams {
+  id: number;
+  content: string;
+}
+
+export function createComment(params: CreateCommentParams): Promise<Comment> {
+  return client
+    .post(`api/v1/shop/${params.id}/comment`, {
+      json: {
+        content: params.content,
+      },
+    })
+    .json();
 }

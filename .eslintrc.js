@@ -41,5 +41,6 @@ module.exports = {
       },
     ],
     'simple-import-sort/exports': 'warn',
+    '@typescript-eslint/no-unused-vars': 'warn',
   },
 };

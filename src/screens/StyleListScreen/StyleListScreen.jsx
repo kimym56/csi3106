@@ -33,7 +33,7 @@ export default function StyleListScreen() {
 
 const styles = StyleSheet.create({
   flatView: {
-    flex: 1,
+    flex: 1 / 3,
     flexDirection: 'column',
   },
   imageStyle: {
