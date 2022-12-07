@@ -1,28 +1,30 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { Portal } from 'react-native-paper';
 import ProfileDisplay from '../../components/ProfileDisplay';
-import { ScreenName } from '../../constants';
-import { useMyShopListQuery } from '../../hooks/shop';
-import { useMyStyleListQuery } from '../../hooks/style';
-import { useCurrentUserQuery } from '../../hooks/user';
+import { ParamList, ScreenName } from '../../constants';
+import { useOtherShopListQuery } from '../../hooks/shop';
+import { useOtherStyleListQuery } from '../../hooks/style';
+import { useOtherUserQuery } from '../../hooks/user';
 import ShopListScreen from '../ShopListScreen';
 import StyleListScreen from '../StyleListScreen';
-import MenuButton from './MenuButton';
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function HomeScreen() {
-  const profileQuery = useCurrentUserQuery();
-  const { data: styleData } = useMyStyleListQuery();
-  const { data: shopData } = useMyShopListQuery();
+export default function OtherUserScreen() {
+  const { params } = useRoute<RouteProp<ParamList, ScreenName.다른사람>>();
+
+  const profileQuery = useOtherUserQuery(params.id);
+  const { data: styleData } = useOtherStyleListQuery(params.id);
+  const { data: shopData } = useOtherShopListQuery(params.id);
 
   return (
     <Portal.Host>
       <View style={styles.container}>
         <View style={styles.topContainer}>
-          <ProfileDisplay query={profileQuery} isMyself={true} />
+          <ProfileDisplay query={profileQuery} isMyself={false} />
         </View>
         <Tab.Navigator>
           <Tab.Screen name={ScreenName.스타일_목록} options={{ title: 'Styles' }}>
@@ -32,7 +34,6 @@ export default function HomeScreen() {
             {() => <ShopListScreen data={shopData} />}
           </Tab.Screen>
         </Tab.Navigator>
-        <MenuButton />
       </View>
     </Portal.Host>
   );

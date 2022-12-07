@@ -5,7 +5,7 @@ export const enum ScreenName {
   회원가입 = 'signup',
   회원가입2 = 'signup2',
   메인 = 'main',
-  홈 = 'home',
+  홈 = '홈',
   스타일_목록 = 'style-list',
   스타일_상세 = 'style-detail',
   스타일_업로드 = 'style-upload',
@@ -14,6 +14,7 @@ export const enum ScreenName {
   상점_업로드 = 'shop-upload',
   마이페이지 = 'mypage',
   마켓 = 'market',
+  다른사람 = 'other-user',
 }
 
 export type ParamList = ParamListBase & {
@@ -22,6 +23,9 @@ export type ParamList = ParamListBase & {
   };
   [ScreenName.상점_상세]: {
     clothesId: number;
+  };
+  [ScreenName.다른사람]: {
+    id: number;
   };
 };
 

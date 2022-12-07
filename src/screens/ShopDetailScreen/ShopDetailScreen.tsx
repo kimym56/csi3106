@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from '@gorhom/bottom-sheet';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import PaginationDot from 'react-native-animated-pagination-dot';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Divider, IconButton } from 'react-native-paper';
@@ -14,6 +14,7 @@ import { useShopCommentCreate, useShopCommentQuery, useShopQuery } from '../../h
 
 export default function ShopDetailScreen() {
   const [imageIndex, setImageIndex] = useState<number>();
+  const { navigate } = useNavigation();
 
   const { params } = useRoute<RouteProp<ParamList, ScreenName.상점_상세>>();
   const query = useShopQuery(params.clothesId);
@@ -55,7 +56,9 @@ export default function ShopDetailScreen() {
         <Divider bold={true} style={{ marginHorizontal: 16, marginBottom: 4 }} />
         <View style={{ marginVertical: 12, marginHorizontal: 24 }}>
           <View style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' }}>
-            <Text>{query.data.owner.owner_name}님</Text>
+            <TouchableOpacity onPress={() => navigate(ScreenName.다른사람, { id: query.data.owner.owner_id })}>
+              <Text>{query.data.owner.owner_name}님</Text>
+            </TouchableOpacity>
             {query.data.soldout == true ? (
               <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <IconButton icon="tag" size={18} style={{ margin: 0 }} />

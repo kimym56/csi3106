@@ -1,11 +1,22 @@
 import React from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import ProfileImage from '../../components/ProfileImage';
-import { useCurrentUserQuery } from '../../hooks/user';
+import { Colors } from '../../constants';
+import { useFollowCreate, useFollowDelete } from '../../hooks/user';
+import ProfileImage from '../ProfileImage';
 
-export default function ProfileDisplay() {
-  const query = useCurrentUserQuery();
+export default function ProfileDisplay({ query, isMyself }: any) {
+  const { isLoading: isLoading1, mutate: follow } = useFollowCreate();
+  const { isLoading: isLoading2, mutate: unFollow } = useFollowDelete();
+
+  const followAction = () => {
+    if (query.data.isFollow) {
+      unFollow(query.data.id);
+    } else {
+      follow(query.data.id);
+    }
+  };
+
   return query.isLoading ? (
     <ActivityIndicator />
   ) : query.isSuccess ? (
@@ -13,7 +24,7 @@ export default function ProfileDisplay() {
       <View style={styles.item}>
         <View style={styles.reviewContainer}>
           <IconButton icon={'star'} iconColor={'#6600ff'} style={{ marginRight: 0 }} />
-          <Text style={styles.reviewScoreText}>{(Math.random() * 2 + 3).toFixed(1)}</Text>
+          <Text style={styles.reviewScoreText}>{/*(Math.random() * 2 + 3).toFixed(1)*/}4.7</Text>
         </View>
         <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
           <ProfileImage />
@@ -23,23 +34,32 @@ export default function ProfileDisplay() {
           <IconButton icon={'message-circle'} size={26} />
         </View>
       </View>
-      <View style={styles.followButtonContainer}>
-        <Text style={styles.nameText}>{query.data?.name}</Text>
-        <Pressable style={styles.followButton}>
-          <Text style={styles.followButtonText}>팔로우</Text>
-        </Pressable>
-      </View>
+      <Text style={styles.nameText}>{query.data?.name}</Text>
+      {!isMyself && (
+        <View style={styles.followButtonContainer}>
+          <Pressable
+            style={[styles.followButton, query.data.isFollow && styles.followTrue]}
+            onPress={followAction}
+            disabled={isLoading1 || isLoading2}
+          >
+            <Text style={[styles.followButtonText, query.data.isFollow && styles.followTrueText]}>
+              {query.data?.isFollow ? '팔로우 취소' : '팔로우'}
+            </Text>
+          </Pressable>
+        </View>
+      )}
       <View style={styles.followContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.fontNumbers}>{Math.round(Math.random() * 5000).toLocaleString()}</Text>
+          <Text style={styles.fontNumbers}>{query.data?.followerNum}</Text>
           <Text style={styles.fontText}>팔로워</Text>
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.fontNumbers}>{Math.round(Math.random() * 1000).toLocaleString()}</Text>
+          <Text style={styles.fontNumbers}>{query.data?.followingNum}</Text>
           <Text style={styles.fontText}>팔로잉</Text>
         </View>
+        {/* 리뷰 넘버 수정 */}
         <View style={styles.textContainer}>
-          <Text style={styles.fontNumbers}>{Math.round(Math.random() * 100).toLocaleString()}</Text>
+          <Text style={styles.fontNumbers}>{/*Math.round(Math.random() * 100).toLocaleString()*/}32</Text>
           <Text style={styles.fontText}>리뷰</Text>
         </View>
       </View>
@@ -64,12 +84,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   nameText: { fontWeight: '400', fontSize: 17, color: 'black', textAlign: 'center' },
-  followContainer: { flexDirection: 'row', justifyContent: 'space-around', marginBottom: 14 },
+  followContainer: { flexDirection: 'row', justifyContent: 'space-around', marginBottom: 14, marginTop: 12 },
   followButtonContainer: { alignItems: 'center' },
   followButton: {
     width: 67,
     height: 24,
-    backgroundColor: '#6600ff',
+    backgroundColor: Colors.ACCENT,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 8,
     shadowOpacity: 0.12,
@@ -79,6 +99,15 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   followButtonText: { fontSize: 14, fontWeight: '500', color: 'white' },
+  followTrue: {
+    width: 90,
+    backgroundColor: Colors.WHITE,
+    borderWidth: 1,
+    borderColor: Colors.ACCENT,
+  },
+  followTrueText: {
+    color: Colors.LIGHTGRAY,
+  },
   fontNumbers: {
     fontWeight: '700',
     fontSize: 16,

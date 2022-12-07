@@ -1,36 +1,24 @@
-import React, { useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import React from 'react';
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ClothesImage from '../../components/ClothesImage';
-import { IMAGE_URL_PREFIX, ParamList, ScreenName } from '../../constants';
+import { IMAGE_URL_PREFIX, ScreenName } from '../../constants';
 import { useMarketListQuery } from '../../hooks/market';
 import { useWishlistDelete, useWishlistPut, useWishlistQuery } from '../../hooks/wishlist';
+
 export default function MarketListScreen(props) {
-  const layout = useWindowDimensions();
   const { navigate } = useNavigation();
   const { data: DATA } = useMarketListQuery();
   const wishlist = useWishlistQuery();
-  const [wish, setWish] = useState(false);
 
-  const [isLoading, setLoading] = useState(false);
   const idList = [];
   const putWishlist = useWishlistPut({
-    onSuccess(data) {
+    onSuccess() {
       console.log('put success');
     },
   });
   const deleteWishlist = useWishlistDelete({
-    onSuccess(data) {
+    onSuccess() {
       console.log('delete success');
     },
   });
@@ -40,7 +28,7 @@ export default function MarketListScreen(props) {
   };
 
   if (wishlist.status == 'success') {
-    Object.entries(wishlist.data).map(([key, item]) => idList.push(item.id));
+    Object.entries(wishlist.data).map(([, item]) => idList.push(item.id));
   }
   var filteredDATA;
   switch (props.filterValue) {
@@ -132,7 +120,9 @@ export default function MarketListScreen(props) {
               </TouchableOpacity>
 
               <View style={{ paddingHorizontal: 6, paddingTop: 4, paddingBottom: 20 }}>
-                <Text style={{ fontSize: 12, fontWeight: '400' }}>{item.owner.owner_name}</Text>
+                <TouchableOpacity onPress={() => navigate(ScreenName.다른사람, { id: item.owner.owner_id })}>
+                  <Text style={{ fontSize: 12, fontWeight: '400' }}>{item.owner.owner_name}</Text>
+                </TouchableOpacity>
                 <Text style={{ fontSize: 14, fontWeight: '800', color: 'black' }}>{item.title}</Text>
                 <Text style={{ fontSize: 12, fontWeight: '400', color: 'black' }}>{item.price.toLocaleString()}원</Text>
               </View>

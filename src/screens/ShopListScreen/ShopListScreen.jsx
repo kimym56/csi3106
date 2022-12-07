@@ -1,42 +1,38 @@
 import React from 'react';
-import { FlatList, Image, StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { IMAGE_URL_PREFIX, ScreenName } from '../../constants';
-import { useMyShopListQuery } from '../../hooks/shop';
+import { ScreenName } from '../../constants';
+import ShopItem from './ShopItem';
 
-export default function ShopListScreen() {
-  const layout = useWindowDimensions();
+export default function ShopListScreen({ data }) {
   const { navigate } = useNavigation();
 
-  const { data: DATA } = useMyShopListQuery();
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
-        data={DATA}
+        data={data}
         renderItem={({ item }) => (
-          <View style={styles.flatView}>
-            <TouchableOpacity onPress={() => navigate(ScreenName.상점_상세, { clothesId: item.id })}>
-              <Image
-                style={[styles.imageStyle, { width: layout.width / 3, height: ((layout.width / 3) * 4) / 3 }]}
-                source={{ uri: `${IMAGE_URL_PREFIX}${item.frontImagePath}` }}
-              />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={styles.flatView}
+            onPress={() => navigate(ScreenName.상점_상세, { clothesId: item.id })}
+          >
+            <ShopItem data={item} />
+          </TouchableOpacity>
         )}
         //Setting the number of column
-        numColumns={3}
+        numColumns={2}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  flatView: {
-    flex: 1 / 3,
-    flexDirection: 'column',
+  container: {
+    marginTop: 4,
   },
-  imageStyle: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  flatView: {
+    width: '50%',
+    padding: 8,
+    flexDirection: 'column',
   },
 });

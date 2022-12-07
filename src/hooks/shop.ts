@@ -1,12 +1,26 @@
 import { useMutation, UseMutationOptions, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Comment, Shop } from '../models/style';
-import { createComment, CreateCommentParams, createShop, CreateShopParams, getCommentList } from '../remotes/shop';
+import {
+  createComment,
+  CreateCommentParams,
+  createShop,
+  CreateShopParams,
+  getCommentList,
+  getOtherShopList,
+} from '../remotes/shop';
 import { getMyShopList, getShop } from '../remotes/shop';
 
 export function useMyShopListQuery() {
   return useQuery({
     queryKey: ['shops'],
     queryFn: () => getMyShopList(),
+  });
+}
+
+export function useOtherShopListQuery(id: number) {
+  return useQuery({
+    queryKey: ['other-shops', id],
+    queryFn: () => getOtherShopList(id),
   });
 }
 

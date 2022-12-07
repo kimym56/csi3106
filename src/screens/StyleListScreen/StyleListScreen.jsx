@@ -3,22 +3,20 @@ import { FlatList, StyleSheet, TouchableOpacity, useWindowDimensions, View } fro
 import { useNavigation } from '@react-navigation/native';
 import ClothesImage from '../../components/ClothesImage';
 import { ScreenName } from '../../constants';
-import { useMyStyleListQuery } from '../../hooks/style';
 
-export default function StyleListScreen() {
+export default function StyleListScreen({ data }) {
   const layout = useWindowDimensions();
   const { navigate } = useNavigation();
-  const { data: DATA } = useMyStyleListQuery();
 
   return (
     <View>
       <FlatList
-        data={DATA}
+        data={data}
         renderItem={({ item }) => (
           <View style={styles.flatView}>
             <TouchableOpacity onPress={() => navigate(ScreenName.스타일_상세, { styleId: item.id })}>
               <ClothesImage
-                style={[styles.imageStyle, { width: layout.width / 3, height: ((layout.width / 3) * 4) / 3 }]}
+                style={[styles.imageStyle, { width: layout.width / 3, height: layout.width / 3 }]}
                 path={item.imagePath}
               />
             </TouchableOpacity>

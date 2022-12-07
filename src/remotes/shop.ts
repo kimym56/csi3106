@@ -5,6 +5,10 @@ export async function getMyShopList(): Promise<Shop[]> {
   return client.get('api/v1/shop/my_market').json();
 }
 
+export async function getOtherShopList(id: number): Promise<Shop[]> {
+  return client.get(`api/v1/shop/others/${id}`).json();
+}
+
 export interface GetRecommendedShopListParams {
   styleId: number;
 }
@@ -52,7 +56,7 @@ export interface CreateShopParams {
   color: string;
 }
 
-export function createShop(params: CreateShopParams): Promise<Shop> {
+export async function createShop(params: CreateShopParams): Promise<Shop> {
   return client.post('api/v1/shop/add', { json: params }).json();
 }
 

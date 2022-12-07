@@ -1,11 +1,25 @@
 import { useMutation, UseMutationOptions, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Style } from '../models/style';
-import { createStyle, CreateStyleParams, deleteStyle, getMyStyleList, getStyle } from '../remotes/style';
+import {
+  createStyle,
+  CreateStyleParams,
+  deleteStyle,
+  getMyStyleList,
+  getOtherStyleList,
+  getStyle,
+} from '../remotes/style';
 
 export function useMyStyleListQuery() {
   return useQuery({
     queryKey: ['styles'],
     queryFn: () => getMyStyleList(),
+  });
+}
+
+export function useOtherStyleListQuery(id: number) {
+  return useQuery({
+    queryKey: ['other-styles', id],
+    queryFn: () => getOtherStyleList(id),
   });
 }
 

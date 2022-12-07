@@ -16,6 +16,7 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import MarketScreen from './screens/MarketScreen';
 import MyPageScreen from './screens/MyPageScreen';
+import OtherUserScreen from './screens/OtherUserScreen';
 import ShopDetailScreen from './screens/ShopDetailScreen';
 import ShopUploadScreen from './screens/ShopUploadScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -99,6 +100,11 @@ function RootNavigator() {
             component={ShopDetailScreen}
           />
           <Stack.Screen name={ScreenName.상점_업로드} options={{ title: 'shop 업로드' }} component={ShopUploadScreen} />
+          <Stack.Screen
+            name={ScreenName.다른사람}
+            options={{ title: '유저 프로필 보기' }}
+            component={OtherUserScreen}
+          />
         </>
       )}
     </Stack.Navigator>

@@ -5,3 +5,9 @@ export interface User {
   name: string;
   weight: number;
 }
+
+export interface UserFollow {
+  id: number;
+  followingNum: number;
+  followerNum: number;
+}
