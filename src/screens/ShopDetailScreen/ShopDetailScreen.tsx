@@ -73,7 +73,7 @@ export default function ShopDetailScreen() {
           </View>
           <Text style={{ color: 'black', fontWeight: '800', fontSize: 18 }}>{query.data.title}</Text>
           <Tag.List style={styles.tagContainer}>
-            <Tag.Item title={TagName[query.data.type as keyof typeof TagName].kor} />
+            <Tag.Item title={TagName[query.data.type as keyof typeof TagName]?.kor} />
           </Tag.List>
           <Text style={{ color: 'black' }}>{query.data.detail}</Text>
         </View>

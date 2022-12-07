@@ -1,8 +1,10 @@
 import React, { useCallback, useRef } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
+import { useNavigation } from '@react-navigation/native';
 import { Text } from 'react-native-paper';
 import ClothesImage from '../../components/ClothesImage';
+import { ScreenName } from '../../constants';
 import { useRecommendedMarketListQuery } from '../../hooks/market';
 
 export interface Props {
@@ -14,6 +16,7 @@ const snapPoints = ['30%', '95%'];
 export default function ShopRecommendationBottomSheet({ styleId }: Props) {
   const ref = useRef<BottomSheet>(null);
   const query = useRecommendedMarketListQuery({ styleId });
+  const { navigate } = useNavigation();
 
   const handleSheetChange = useCallback((index: number) => {
     console.log('handleSheetChange', index);
@@ -37,10 +40,15 @@ export default function ShopRecommendationBottomSheet({ styleId }: Props) {
         <FlatList
           data={query.data}
           renderItem={({ item }) => (
-            <View style={styles.flatView}>
+            <TouchableOpacity
+              style={styles.flatView}
+              onPress={() => {
+                navigate(ScreenName.상점_상세, { clothesId: item.id });
+              }}
+            >
               <Text>{item.id}</Text>
               {item.frontImagePath != null && <ClothesImage style={styles.imageStyle} path={item.frontImagePath} />}
-            </View>
+            </TouchableOpacity>
           )}
           numColumns={2}
         />
